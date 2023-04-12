@@ -15,12 +15,16 @@ class ClientController extends Controller
         return view('clients.index', ['clients' => $clients]);
     }
 
+    public function show() {
+        return view('clients.show');
+    }
+
     public function create() {
         return view('clients.create');
     }
 
     public function new() {
-        
+        return view('clients.show');
     }
 
     public function edit() {
@@ -28,7 +32,9 @@ class ClientController extends Controller
     }
 
     public function delete() {
-        
+        $clients = Client::all();
+
+        return view('clients.index', ['clients' => $clients]);
     }
 
 }
