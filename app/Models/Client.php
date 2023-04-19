@@ -9,4 +9,15 @@ class Client extends Model
 {
     use HasFactory;
     protected $table = 'clients';
+
+    public function updateClient($id, $name, $fone, $address, $number, $city)
+    {
+        $client = Client::find($id);
+        $client->name = $name;
+        $client->fone = $fone;
+        $client->address = $address;
+        $client->number = $number;
+        $client->city = $city;
+        $client->save();
+    }
 }

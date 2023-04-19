@@ -28,18 +28,20 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('show-product');
-Route::get('/products/new', [ProductController::class, 'create'])->name('create-product');
-Route::post('/products', [ProductController::class, 'new'])->name('new-product');
-Route::put('/products/{id}', [ProductController::class, 'edit'])->name('edit-product');
-Route::delete('/products/{id}', [ProductController::class, 'delete'])->name('delete-product');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('show_product');
+Route::get('/products/new', [ProductController::class, 'create'])->name('create_product');
+Route::post('/products', [ProductController::class, 'new'])->name('new_product');
+Route::put('/products/{id}', [ProductController::class, 'edit'])->name('edit_product');
+Route::delete('/products/{id}', [ProductController::class, 'delete'])->name('delete_product');
 
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
-Route::get('/clients/{id}', [ClientController::class, 'show'])->name('show-client');
-Route::get('/clients/new', [ClientController::class, 'create'])->name('create-client');
-Route::post('/clients', [ClientController::class, 'new'])->name('new-client');
-Route::put('/clients/{id}', [ClientController::class, 'edit'])->name('edit-client');
-Route::delete('/clients/{id}', [ClientController::class, 'delete'])->name('delete-client');
+Route::get('/clients/new', [ClientController::class, 'create'])->name('create_client');
+Route::get('/clients/{id}', [ClientController::class, 'show'])->name('show_client');
+Route::post('/clients', [ClientController::class, 'new'])->name('new_client');
+Route::put('/clients/{id}', [ClientController::class, 'edit'])->name('edit_client');
+Route::delete('/clients/{id}', [ClientController::class, 'delete'])->name('delete_client');
+
+Route::get('/users', [App\Http\Controllers\UsersController::class], 'index')->name('index_users');
 
 Route::get('/requests', function () {
     return view('base.requests');
