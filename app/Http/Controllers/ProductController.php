@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
     //
     public function index() {
-        return view('products.index');
+        $products = Product::all();
+        return view('products.index', ['products' => $products]);
     }
 
     public function show() {
@@ -27,7 +29,14 @@ class ProductController extends Controller
         return view('products.edit');
     }
 
-    public function delete() {
-        
+    public function delete($id) {
+        $product = Product::find($id);
+
+        if ($product) {
+            $product->delete();
+            return view('products.index')->with('success', 'Producto excluído com sucesso!');
+        } else {
+            return view('products.index')->with('error', 'Produto não encontrado.');
+        }
     }
 }
