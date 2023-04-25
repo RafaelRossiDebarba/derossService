@@ -35,8 +35,6 @@ Route::put('/products/{id}', [ProductController::class, 'edit'])->name('edit_pro
 Route::delete('/products/{id}', [ProductController::class, 'delete'])->name('delete_product');
 
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
-Route::get('/clients/new', [ClientController::class, 'create'])->name('create_client');
-Route::get('/clients/{id}', [ClientController::class, 'show'])->name('show_client');
 Route::post('/clients', [ClientController::class, 'new'])->name('new_client');
 Route::put('/clients/{id}', [ClientController::class, 'edit'])->name('edit_client');
 Route::delete('/clients/{id}', [ClientController::class, 'delete'])->name('delete_client');

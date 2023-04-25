@@ -20,4 +20,15 @@ class Client extends Model
         $client->city = $city;
         $client->save();
     }
+
+    public function newClient($name, $fone, $address, $number, $city)
+    {
+        $client = new Client;
+        $client->name = $name;
+        $client->fone = $fone;
+        $client->address = $address;
+        $client->number = $number;
+        $client->city = $city;
+        $client->save();
+    }
 }
