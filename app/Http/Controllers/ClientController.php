@@ -10,9 +10,9 @@ class ClientController extends Controller
     //
 
     public function index() {
-        #$itensPaginas = 8; // número de itens por página
-        #$clients = Client::paginate($itensPaginas);
-        $clients = Client::all();
+        $itensPaginas = 50;
+        $clients = Client::paginate($itensPaginas);
+        #$clients = Client::all();
         $client = new Client;
 
         return view('clients.index', ['clients' => $clients, 'client' => $client]);
@@ -32,14 +32,15 @@ class ClientController extends Controller
 
     public function delete($id) {
         $client = Client::find($id);
+        $itensPaginas = 50;
         if ($client) {
             $client->delete();
 
-            $clients = Client::all();
+            $clients = Client::paginate($itensPaginas);
             $client = new Client;
             return view('clients.index', ['clients' => $clients, 'client' => $client])->with('success', 'Cliente excluído com sucesso!');
         } else {
-            $clients = Client::all();
+            $clients = Client::paginate($itensPaginas);
             $client = new Client;
             return view('clients.index', ['clients' => $clients, 'client' => $client])->with('error', 'Cliente não encontrado.');
         }

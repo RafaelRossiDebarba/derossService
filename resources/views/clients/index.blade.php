@@ -127,6 +127,11 @@
         @endif
       </tbody>
     </table>
+    @if ($clients->links()->paginator->hasPages())
+      <div class="mt-4 p-4 box has-text-centered">
+        {!! $clients->links() !!}
+      </div>
+    @endif
   </div>
   <script src="{{ asset('js/clients.js') }}"></script>
 </div>
