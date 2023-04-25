@@ -114,6 +114,11 @@
             </tbody>
           </table>
           @endif
+          @if ($products->links()->paginator->hasPages())
+            <div class="mt-4 p-4 box has-text-centered">
+              {!! $products->links() !!}
+            </div>
+          @endif
         </div>
       </div>
     </div>

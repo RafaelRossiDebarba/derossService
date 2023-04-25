@@ -9,7 +9,9 @@ class ProductController extends Controller
 {
     //
     public function index() {
-        $products = Product::all();
+        $itensPaginas = 50;
+        $products = Product::paginate($itensPaginas);
+        #$products = Product::all();
         $product = new Product;
         return view('products.index', ['products' => $products, 'product' => $product]);
     }
@@ -28,15 +30,16 @@ class ProductController extends Controller
 
     public function delete($id) {
         $product = Product::find($id);
+        $itensPaginas = 50;
 
         if ($product) {
             $product->delete();
 
-            $products = Product::all();
+            $products = Product::paginate($itensPaginas);
             $product = new Product;
             return view('products.index', ['products' => $products, 'product' => $product])->with('success', 'Producto excluído com sucesso!');
         } else {
-            $products = Product::all();
+            $products = Product::paginate($itensPaginas);
             $product = new Product;
             return view('products.index', ['products' => $products, 'product' => $product])->with('error', 'Produto não encontrado.');
         }
