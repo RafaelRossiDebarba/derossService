@@ -28,8 +28,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('show_product');
-Route::get('/products/new', [ProductController::class, 'create'])->name('create_product');
 Route::post('/products', [ProductController::class, 'new'])->name('new_product');
 Route::put('/products/{id}', [ProductController::class, 'edit'])->name('edit_product');
 Route::delete('/products/{id}', [ProductController::class, 'delete'])->name('delete_product');

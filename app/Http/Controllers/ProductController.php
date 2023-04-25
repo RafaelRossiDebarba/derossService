@@ -10,23 +10,20 @@ class ProductController extends Controller
     //
     public function index() {
         $products = Product::all();
-        return view('products.index', ['products' => $products]);
+        $product = new Product;
+        return view('products.index', ['products' => $products, 'product' => $product]);
     }
 
-    public function show() {
-        return view('products.show');
+    public function new(Request $request) {
+        $product = new Product;
+        $product->newProduct($request->name, $request->qtd, $request->price);
+        return redirect("products");
     }
 
-    public function create() {
-        return view('products.create');
-    }
-
-    public function new() {
-
-    }
-
-    public function edit() {
-        return view('products.edit');
+    public function edit($id, Request $request) {
+        $product = new Product;
+        $product->updateProduct($id, $request->name, $request->qtd, $request->price);
+        return redirect("products");
     }
 
     public function delete($id) {
@@ -34,9 +31,14 @@ class ProductController extends Controller
 
         if ($product) {
             $product->delete();
-            return view('products.index')->with('success', 'Producto excluído com sucesso!');
+
+            $products = Product::all();
+            $product = new Product;
+            return view('products.index', ['products' => $products, 'product' => $product])->with('success', 'Producto excluído com sucesso!');
         } else {
-            return view('products.index')->with('error', 'Produto não encontrado.');
+            $products = Product::all();
+            $product = new Product;
+            return view('products.index', ['products' => $products, 'product' => $product])->with('error', 'Produto não encontrado.');
         }
     }
 }
