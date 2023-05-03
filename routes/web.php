@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,8 @@ Route::put('/clients/{id}', [ClientController::class, 'edit'])->name('edit_clien
 Route::delete('/clients/{id}', [ClientController::class, 'delete'])->name('delete_client');
 
 Route::get('/users', [App\Http\Controllers\UsersController::class], 'index')->name('index_users');
+
+Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 
 Route::get('/requests', function () {
     return view('base.requests');

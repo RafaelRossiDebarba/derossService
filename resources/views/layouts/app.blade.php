@@ -68,9 +68,9 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('requests'))
+                            @if (Route::has('orders'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('requests') }}">{{ __('Requests') }}</a>
+                                    <a class="nav-link" href="{{ route('orders') }}">{{ __('Orders') }}</a>
                                 </li>
                             @endif
 
