@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,11 @@ Route::delete('/clients/{id}', [ClientController::class, 'delete'])->name('delet
 Route::get('/users', [App\Http\Controllers\UsersController::class], 'index')->name('index_users');
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+
+Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::post('/services', [ServiceController::class, 'new'])->name('new_service');
+Route::put('/services/{id}', [ServiceController::class, 'edit'])->name('edit_service');
+Route::delete('/services/{id}', [ServiceController::class, 'delete'])->name('delete_service');
 
 Route::get('/requests', function () {
     return view('base.requests');
