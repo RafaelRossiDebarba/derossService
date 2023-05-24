@@ -46,6 +46,7 @@
           <th scope="col">Descrição</th>
           <th scope="col">Client ID</th>
           <th scope="col">Order ID</th>
+          <th scope="col">Service Value</th>
         </tr>
       </thead>
       <tbody>
@@ -56,6 +57,7 @@
           <td>{{ $service->description }}</td>
           <td>{{ $service->client_id }}</td>
           <td>{{ $service->order_id }}</td>
+          <td>{{ $service->service_value }}</td>
           <td>
             <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#updateServiceModal{{ $service->id }}">
               Editar
@@ -82,6 +84,11 @@
                   <div class="form-group">
                     <label for="description">Descrição:</label>
                     <input type="text" class="form-control" name="description" value="{{ $service->description }}" required autofocus>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="service_value">Preço mão de obra:</label>
+                    <input type="text" class="form-control" name="service_value" value="{{ $service->service_value }}" required autofocus>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

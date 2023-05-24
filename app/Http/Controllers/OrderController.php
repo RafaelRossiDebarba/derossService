@@ -16,4 +16,10 @@ class OrderController extends Controller
     public function new(Request $request) {
 
     }
+
+    public function edit($id, Request $request) {
+        $order = new Order;
+        $order->updateOrder($id, $request->service_value);
+        return redirect('services');
+    }
 }

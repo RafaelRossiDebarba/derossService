@@ -15,4 +15,10 @@ class Order extends Model
         $order->service_value = 0.0;
         $order->save();
     }
+
+    public function updateOrder($id, $service_value) {
+        $order = Order::find($id)->first();
+        $order->service_value = $service_value;
+        $order->save();
+    }
 }
