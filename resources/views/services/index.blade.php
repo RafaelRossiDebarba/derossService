@@ -59,6 +59,9 @@
           <td>{{ $service->order_id }}</td>
           <td>{{ $service->service_value }}</td>
           <td>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#productServiceModal{{ $service->id }}">
+              Produtos
+            </button>
             <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#updateServiceModal{{ $service->id }}">
               Editar
             </button>
@@ -72,7 +75,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="updateServiceModalLabel{{ $service->id }}">Atualizar servicee</h5>
+                <h5 class="modal-title" id="updateServiceModalLabel{{ $service->id }}">Atualizar serviço</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -93,6 +96,59 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" id="update_service" class="btn btn-primary">Atualizar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="productServiceModal{{ $service->id }}" tabindex="-1" role="dialog" aria-labelledby="productServiceModalLabel{{ $service->id }}" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="productServiceModalLabel{{ $service->id }}">Produtos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div>
+                    @if (isset($order_products))
+                    @foreach($order_products as $order_product_table)
+                      @if($order_product_table->order_id == $service->order_id)
+                      <div>
+                        <p>ID: {{ $order_product_table->id }} --- Product ID:{{ $order_product_table->product_id }} <br>
+                        Valor: {{ $order_product_table->price }} --- QTD:{{ $order_product_table->qtd }}</p>
+                      </div>
+                      @endif
+                    @endforeach
+                    @endif
+                </div>
+                
+                <form method="POST" action="{{ url('/orders/product/'.$service->order_id) }}">
+                  @csrf
+                  @method('POST')
+                  <label for="product_id">Selecione um produo:</label>
+                  <select name="product_id" id="product_id">
+                  @foreach($products as $id => $product)
+                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                  @endforeach
+                  </select>
+
+                  <div class="form-group">
+                    <label for="price">Preço:</label>
+                    <input type="text" class="form-control" name="price" value="{{ $order_product->price }}" required autofocus>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="qtd">Quantidade:</label>
+                    <input type="text" class="form-control" name="qtd" value="{{ $order_product->qtd }}" required autofocus>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" id="update_service" class="btn btn-primary">Adicionar</button>
                   </div>
                 </form>
               </div>

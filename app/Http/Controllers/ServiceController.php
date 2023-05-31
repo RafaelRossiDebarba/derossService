@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Service;
 use App\Models\Client;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderProduct;
 
 class ServiceController extends Controller
 {
@@ -15,11 +17,21 @@ class ServiceController extends Controller
                         ->select('services.id', 'services.description', 'services.order_id', 'services.client_id','orders.service_value')
                         ->get();
         $clients = Client::all();
+        $products = Product::all();
+        $order_products = OrderProduct::all();
         
         $service = new Service;
         $order = new Order;
+        $order_product = new OrderProduct;
 
-        return view('services.index', ['services' => $services, 'service' => $service, 'clients' => $clients, 'order' => $order]);
+        return view('services.index', ['services' => $services, 
+                                        'service' => $service, 
+                                        'clients' => $clients, 
+                                        'order' => $order, 
+                                        'products' => $products,
+                                        'order_product' => $order_product,
+                                        'order_products' => $order_products,
+                                    ]);
     }
 
     public function new(Request $request) {
