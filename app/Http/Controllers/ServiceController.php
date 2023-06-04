@@ -14,11 +14,14 @@ class ServiceController extends Controller
 {
     public function index() {
         $services = Service::join('orders', 'orders.id', '=', 'services.order_id')
-                        ->select('services.id', 'services.description', 'services.order_id', 'services.client_id','orders.service_value')
+                        ->join('clients', 'clients.id', '=', 'services.client_id')
+                        ->select('services.id', 'services.description', 'services.order_id', 'services.client_id', 'clients.name','orders.service_value')
                         ->get();
         $clients = Client::all();
         $products = Product::all();
-        $order_products = OrderProduct::all();
+        $order_products = OrderProduct::join('products', 'products.id', '=', 'order_product.product_id')
+                        ->select('products.name', 'order_product.id', 'order_product.qtd', 'order_product.price', 'order_product.order_id')
+                        ->get();
         
         $service = new Service;
         $order = new Order;
@@ -54,16 +57,44 @@ class ServiceController extends Controller
 
     public function delete($id) {
         $service = Service::find($id);
+        $ok = false;
         if ($service) {
             $service->delete();
+            $ok = true;
+        } 
 
-            $services = Service::all();
-            $service = new Service;
-            return view('service.index', ['services' => $services, 'service' => $service])->with('success', 'Serviço excluído com sucesso!');
+        $services = Service::join('orders', 'orders.id', '=', 'services.order_id')
+                        ->join('clients', 'clients.id', '=', 'services.client_id')
+                        ->select('services.id', 'services.description', 'services.order_id', 'services.client_id', 'clients.name','orders.service_value')
+                        ->get();
+        $clients = Client::all();
+        $products = Product::all();
+        $order_products = OrderProduct::join('products', 'products.id', '=', 'order_product.product_id')
+                        ->select('products.name', 'order_product.id', 'order_product.qtd', 'order_product.price', 'order_product.order_id')
+                        ->get();
+        
+        $service = new Service;
+        $order = new Order;
+        $order_product = new OrderProduct;
+
+        if($ok) {
+            return view('services.index', ['services' => $services, 
+                    'service' => $service, 
+                    'clients' => $clients, 
+                    'order' => $order, 
+                    'products' => $products,
+                    'order_product' => $order_product,
+                    'order_products' => $order_products,
+            ])->with('success', 'Serviço excluído com sucesso!');
         } else {
-            $services = Service::all();
-            $service = new Service;
-            return view('service.index', ['services' => $services, 'service' => $service])->with('error', 'Serviço não encontrado.');
+            return view('services.index', ['services' => $services, 
+                    'service' => $service, 
+                    'clients' => $clients, 
+                    'order' => $order, 
+                    'products' => $products,
+                    'order_product' => $order_product,
+                    'order_products' => $order_products,
+            ])->with('error', 'Serviço não foi excluido!');
         }
     }
 }

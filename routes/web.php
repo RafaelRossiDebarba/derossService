@@ -44,6 +44,8 @@ Route::get('/users', [App\Http\Controllers\UsersController::class], 'index')->na
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::put('/orders/{id}', [OrderController::class, 'edit'])->name('edit_order');
 Route::post('/orders/product/{id}', [OrderController::class, 'product'])->name('add_product_order');
+Route::put('/orders/product/{id}', [OrderController::class, 'editProduct'])->name('edit_product_order');
+Route::delete('/orders/product/{id}', [OrderController::class, 'deleteProduct'])->name('delete_product_order');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
 Route::post('/services', [ServiceController::class, 'new'])->name('new_service');

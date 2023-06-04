@@ -18,4 +18,11 @@ class OrderProduct extends Model
         $product->price = $price;
         $product->save();
     }
+
+    public function editProduct($id, $qtd, $price) {
+        $product = OrderProduct::find($id)->first();
+        $product->qtd = $qtd;
+        $product->price = $price;
+        $product->save();
+    }
 }

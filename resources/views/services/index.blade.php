@@ -44,7 +44,7 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Descrição</th>
-          <th scope="col">Client ID</th>
+          <th scope="col">Client</th>
           <th scope="col">Order ID</th>
           <th scope="col">Service Value</th>
         </tr>
@@ -55,7 +55,7 @@
         <tr>
           <th scope="row">{{ $service->id }}</th>
           <td>{{ $service->description }}</td>
-          <td>{{ $service->client_id }}</td>
+          <td>{{ $service->name }}</td>
           <td>{{ $service->order_id }}</td>
           <td>{{ $service->service_value }}</td>
           <td>
@@ -118,8 +118,45 @@
                     @foreach($order_products as $order_product_table)
                       @if($order_product_table->order_id == $service->order_id)
                       <div>
-                        <p>ID: {{ $order_product_table->id }} --- Product ID:{{ $order_product_table->product_id }} <br>
-                        Valor: {{ $order_product_table->price }} --- QTD:{{ $order_product_table->qtd }}</p>
+                        <p>Nome: {{ $order_product_table->name }} </p>
+                        <p> Valor: {{ $order_product_table->price }} --- QTD:{{ $order_product_table->qtd }}</p>
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editProductModal{{ $order_product_table->id }}">
+                          Editar
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteProductOrder({{ $order_product_table->id }}, 'Terminar')">
+                          Excluir
+                        </button>
+                      </div>
+                      <div class="modal fade" id="editProductModal{{ $order_product_table->id }}" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel{{ $order_product_table->id }}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="editProductModalLabel{{ $order_product_table->id }}">Atualizar serviço</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form method="POST" action="{{ url('/orders/product/'.$order_product_table->id) }}">
+                                @csrf
+                                @method('PUT')
+                                <div class="form-group">
+                                  <label for="price">Preço:</label>
+                                  <input type="text" class="form-control" name="price" value="{{ $order_product_table->price }}" required autofocus>
+                                </div>
+
+                                <div class="form-group">
+                                  <label for="qtd">Quantidade:</label>
+                                  <input type="text" class="form-control" name="qtd" value="{{ $order_product_table->qtd }}" required autofocus>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                  <button type="submit" id="update_service" class="btn btn-primary">Atualizar</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       @endif
                     @endforeach
