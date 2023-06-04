@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Client;
+use App\Models\Product;
+use App\Models\Service;
+
 class HomeController extends Controller
 {
     /**
@@ -23,6 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $qtd_clients = count(Client::all());
+        $qtd_products = count(Product::all());
+        $qtd_services = count(Service::all());
+
+        return view('home', ['qtd_clients' => $qtd_clients, 'qtd_products' => $qtd_products, 'qtd_services' => $qtd_services]);
     }
 }

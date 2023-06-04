@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <p>Quantidade de pessoas cadastradas: {{ $qtd_clients }}</p>
+                    <p>Quantidade de produtos cadastrados: {{ $qtd_products }}</p>
+                    <p>Quantidade de serviços: {{ $qtd_services }}</p>
                 </div>
             </div>
         </div>
