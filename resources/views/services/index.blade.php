@@ -30,7 +30,7 @@
             @endforeach
             </select>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
               <button type="submit" id="update_Service" class="btn btn-primary">Atualizar</button>
             </div>
           </form>
@@ -94,7 +94,7 @@
                     <input type="text" class="form-control" name="service_value" value="{{ $service->service_value }}" required autofocus>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="submit" id="update_service" class="btn btn-primary">Atualizar</button>
                   </div>
                 </form>
@@ -150,7 +150,7 @@
                                   <input type="text" class="form-control" name="qtd" value="{{ $order_product_table->qtd }}" required autofocus>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                   <button type="submit" id="update_service" class="btn btn-primary">Atualizar</button>
                                 </div>
                               </form>
@@ -169,7 +169,7 @@
                   <label for="product_id">Selecione um produo:</label>
                   <select name="product_id" id="product_id">
                   @foreach($products as $id => $product)
-                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                    <option value="{{ $product->id }}">{{ $product->name }} - {{ $product->price }}</option>
                   @endforeach
                   </select>
 
@@ -184,7 +184,7 @@
                   </div>
 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="submit" id="update_service" class="btn btn-primary">Adicionar</button>
                   </div>
                 </form>

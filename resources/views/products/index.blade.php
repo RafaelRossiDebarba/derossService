@@ -32,7 +32,7 @@
                 <input type="text" class="form-control" name="price" value="{{ $product->price }}" required autofocus>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 <button type="submit" id="atualizar_colaborador" class="btn btn-primary">Salvar</button>
               </div>
             </form>
@@ -97,7 +97,7 @@
                     <input type="text" class="form-control" name="price" value="{{ $product->price }}" required autofocus>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="submit" id="atualizar_colaborador" class="btn btn-primary">Atualizar</button>
                   </div>
                 </form>
